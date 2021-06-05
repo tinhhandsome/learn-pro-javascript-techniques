@@ -111,3 +111,61 @@ Figure 10-1. An example of Instant Domain Search looking for domain names as you
 object is different from all other modern browsers, it still has the same set of useful functionalities. The XMLHttpRequest object has a number of methods that are used to establish a
 connection and read data from the server. Listing 10-1 shows how to establish a basic GET
 request with the server.
+
+Ajax là một thuật ngữ được đặt ra bởi Jesse James Garrett của Con đường thích ứng để giải thích sự không đồng bộ
+giao tiếp từ máy khách đến máy chủ có thể thực hiện được bằng cách sử dụng đối tượng XMLHttpRequest,
+được cung cấp bởi tất cả các trình duyệt hiện đại. Đại diện cho JavaScript và XML không đồng bộ, Ajax là
+chỉ đơn giản là một thuật ngữ được sử dụng để đóng gói các kỹ thuật cần thiết để tạo một cation thiết bị web động. Ngoài ra, các thành phần riêng lẻ của kỹ thuật Ajax hoàn toàn
+có thể hoán đổi cho nhau — sử dụng HTML thay vì XML (ví dụ) là hoàn toàn hợp lệ.
+Trong chương này, bạn sẽ thấy các chi tiết tạo nên quy trình Ajax đầy đủ (
+chính nó tập trung vào việc thực hiện một yêu cầu đến một máy chủ từ một trình duyệt). Tôi thảo luận mọi thứ từ
+bản thân yêu cầu vật lý, đối với tương tác JavaScript và thao tác dữ liệu cần thiết để hoàn thành công việc. Điều này bao gồm những điều sau:
+• Kiểm tra các loại yêu cầu HTTP khác nhau và xác định cách gửi dữ liệu tốt nhất
+đối tượng của một máy chủ.
+• Xem xét toàn bộ phản hồi HTTP và cố gắng xử lý tất cả các lỗi có thể
+xảy ra với nó, bao gồm cả thời gian chờ của máy chủ.
+• Đọc, duyệt và thao tác kết quả dữ liệu đến từ máy chủ trong nó
+phản ứng.
+Thông qua sự hiểu biết đầy đủ này về cách hoạt động của quy trình Ajax và cách nó có thể
+được triển khai, bạn sẽ thấy cách nó có thể được sử dụng trong mọi thứ, từ các tình huống thông thường đến đầy đủ
+các ứng dụng. Trong các Chương 11, 12 và 13, bạn cũng sẽ khám phá một loạt các nghiên cứu điển hình
+sử dụng các kỹ thuật Ajax.
+Sử dụng Ajax
+Không cần nhiều mã để tạo một triển khai Ajax đơn giản, tuy nhiên, những gì mà đề xuất mang lại cho bạn thật tuyệt vời. Ví dụ: thay vì phải buộc người dùng yêu cầu
+một trang web hoàn toàn mới sau khi gửi biểu mẫu, quá trình gửi có thể được xử lý
+không đồng bộ, và sau đó một phần nhỏ kết quả mong muốn có thể được tải sau khi hoàn thành.
+Ví dụ: quá trình tìm kiếm các tên miền có sẵn (để mua) có thể chậm
+và cần cù. Mỗi khi bạn muốn tìm kiếm một tên mới, bạn phải nhập yêu cầu của mình
+vào một biểu mẫu, gửi nó và xem trang tải lại. Bằng cách sử dụng Ajax, bạn có thể nhận được kết quả tức thì, chẳng hạn như với trang web ứng dụng trực tuyến Tìm kiếm miền tức thì (http: //
+Ví dụ: Instantdomainsearch.com/), được hiển thị trong Hình 10-1.
+215
+C H A P T E R 10
+■ ■ ■
+7273ch10final.qxd 16/11/06 8:11 SA Trang 215HTTP Yêu cầu
+Khía cạnh quan trọng nhất và có lẽ nhất quán nhất của Ajax là phần yêu cầu HTTP
+của quy trình. Giao thức truyền siêu văn bản (HTTP) được thiết kế để chuyển HTML một cách đơn giản
+tài liệu và các tệp tương tự. Rất may, tất cả các trình duyệt hiện đại đều hỗ trợ một phương tiện thiết lập
+Các kết nối HTTP động, sử dụng JavaScript. Điều này được chứng minh là vô cùng hữu ích trong việc phát triển các ứng dụng web đáp ứng nhiều hơn.
+Gửi dữ liệu đến máy chủ một cách không đồng bộ và nhận lại dữ liệu bổ sung là mục đích của Ajax. Dữ liệu được định dạng như thế nào cuối cùng phụ thuộc vào các yêu cầu cụ thể của bạn, điều này tôi sẽ thảo luận chi tiết trong phần “Xử lý dữ liệu phản hồi” của chương này.
+Trong các phần sau, bạn sẽ thấy cách định dạng dữ liệu để chuyển đến máy chủ
+sử dụng các yêu cầu HTTP khác nhau. Sau đó, bạn sẽ xem xét cách thiết lập các kết nối cơ bản với máy chủ và bạn sẽ thấy các chi tiết cần thiết để thực hiện điều này trong
+môi trường trình duyệt chéo.
+Thiết lập kết nối
+Khía cạnh chính của quá trình Ajax là việc mở kết nối đến máy chủ. Ở đó
+là một số cách khác nhau để đạt được mục tiêu này, nhưng chúng tôi sẽ xem xét một phương tiện cụ thể
+qua đó bạn có thể gửi và nhận dữ liệu một cách dễ dàng. Kỹ thuật này thường được gọi là
+“Sử dụng đối tượng XMLHttpRequest.”
+Việc truyền đạt dữ liệu được thực hiện theo hai cách khác nhau bằng cách sử dụng
+Đối tượng XMLHttpRequest, tùy thuộc vào trình duyệt của người dùng:
+1. Internet Explorer, công ty đi tiên phong trong phương tiện giao tiếp dựa trên trình duyệt này,
+thiết lập tất cả các kết nối của nó bằng cách sử dụng ActiveXObject (phiên bản chính xác của nó
+thay đổi tùy thuộc vào phiên bản của Internet Explorer). Rất may, Internet
+Explorer 7 có hỗ trợ riêng cho đối tượng XMLHttpRequest.
+2. Tất cả các trình duyệt hiện đại khác đã bản địa hóa các khả năng của XMLHttpRequest
+đối tượng thành một đối tượng cùng tên. Điều này bao gồm Firefox, Opera và Safari.
+216 CHƯƠNG 10 ■ GIỚI THIỆU VỀ AJAX
+Hình 10-1. Ví dụ về Tìm kiếm miền tức thì tìm kiếm tên miền khi bạn nhập
+7273ch10final.qxd 16/11/06 8:11 SA Trang 216 Rất cảm ơn, mặc dù phương pháp tạo XMLHttpRequest của Internet Explorer
+đối tượng khác với tất cả các trình duyệt hiện đại khác, nó vẫn có cùng một tập hợp các chức năng hữu ích. Đối tượng XMLHttpRequest có một số phương thức được sử dụng để thiết lập
+kết nối và đọc dữ liệu từ máy chủ. Liệt kê 10-1 cho thấy cách thiết lập GET cơ bản
+yêu cầu với máy chủ. 
