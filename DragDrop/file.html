@@ -1,0 +1,31 @@
+<!-- Listing 7-21. Using the DOM-Drag to Simulate In-Browser Draggable Windows -->
+<html>
+
+<head>
+    <title>DOM-Drag – Draggable Window Demo</title>
+    <script src="domdrag.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            // Initalize the DOM-Drag function, making the element with
+            // an ID of 'window' draggable
+            Drag.init(document.getElementById("window"));
+        };
+    </script>
+    <style>
+        #window {
+            border: 1px solid #DDD;
+            border-top: 15px solid #DDD;
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Draggable Window Demo</h1>
+    158 CHAPTER 7 ■ JAVASCRIPT AND CSS
+    7273ch07final.qxd 11/16/06 8:15 AM Page 158<div id="window">I am a draggable window, feel free to move me around!
+    </div>
+</body>
+
+</html>
