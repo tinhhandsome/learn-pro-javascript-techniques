@@ -61,3 +61,10 @@ var errMsg = {
     },
   },
 };
+
+// Using this new rule set data structure you can now write a common, consistent means of
+// form validation and a display of error messages, which I discuss in the next section.
+// Sử dụng các chức năng xác thực khác nhau từ phần trước, bây giờ bạn có thể tạo
+// cấu trúc chung để xử lý tất cả các kỹ thuật xác nhận khác nhau. Điều quan trọng là
+// tất cả các bài kiểm tra được xử lý giống nhau với các tên thông thường và các thông báo lỗi ngữ nghĩa. Các
+// cấu trúc dữ liệu tập quy tắc hoàn chỉnh có thể được tìm thấy trong Liệt kê 8-8
