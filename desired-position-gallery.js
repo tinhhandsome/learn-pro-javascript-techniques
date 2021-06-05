@@ -22,3 +22,40 @@ function nextImage() {
 // is currently being viewed (in this case, a reference to the image stored in the curImage variable). Using this state, you can easily determine where a user is in the gallery and direct them
 // to their desired location, as shown in Listing 9-13.
 
+#gallery {
+  position: absolute;
+  width: 650px;
+  height: 510px;
+  background: #fff;
+  z-index: 110;
+  display: none;
+}
+#gallery_title {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+}
+#gallery img {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 640px;
+  height: 480px;
+  border: 0px;
+  z-index: 115;
+}
+#gallery.tall {
+  width: 430px;
+  height: 590px;
+}
+#gallery.tall img {
+  width: 420px;
+  height: 560px;
+}
+
+// With the CSS, HTML, and JavaScript working together you now have a positioned image
+// gallery that looks rather sharp, as you can see in Figure 9-5.
+
