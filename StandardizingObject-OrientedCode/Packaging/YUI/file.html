@@ -1,0 +1,27 @@
+<!-- Listing 3-10. Packaging and Namespacing Within the Yahoo UI Library -->
+<html>
+
+<head>
+    <title>Yahoo! UI Demo</title>
+    <!-- Import the main Yahoo UI library -->
+    <script type="text/javascript" src="YAHOO.js"></script>
+    <!-- Import the events package -->
+    <script type="text/javascript" src="event.js"></script>
+    <!-- Use the imported Yahoo UI library -->
+    <script type="text/javascript">
+        // All Yahoo events and utilities are contained within the YAHOO
+        // namespace, and subdivided into smaller namespaces (like 'util')
+        YAHOO.util.Event.addListener('button', 'click', function () {
+            alert("Thanks for clicking the button!");
+        });
+    </script>
+</head>
+
+<body>
+    <input type="button" id="button" value="Click Me!" />
+</body>
+
+</html>
+<!-- Both Dojo and Yahoo UI do a very good job of organizing and maintaining a lot of code
+within a single large package. Understanding how they accomplish this with JavaScript namespacing can be extremely helpful when it comes time to implement a package architecture of
+your own. -->

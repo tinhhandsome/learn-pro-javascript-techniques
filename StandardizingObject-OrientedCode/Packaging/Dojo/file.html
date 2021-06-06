@@ -1,0 +1,45 @@
+<!-- Listing 3-9. Packaging and Namespacing in Dojo -->
+<html>
+
+<head>
+    <title>Accordion Widget Demo</title>
+    <!-- Include the Dojo Framework -->
+    <script type="text/javascript" src="dojo.js"></script>
+    <!-- Include the different Dojo Packages -->
+    <script type="text/javascript">
+        // Two different packages are imported and used to create
+        // an Accordian Container widget
+        dojo.require("dojo.widget.AccordionContainer");
+        dojo.require("dojo.widget.ContentPane");
+    </script>
+</head>
+
+<body>
+    <div dojoType="AccordionContainer" labelNodeClass="label">
+        <div dojoType="ContentPane" open="true" label="Pane 1">
+            <h2>Pane 1</h2>
+            <p>Nunc consequat nisi vitae quam. Suspendisse sed nunc. Proin…</p>
+        </div>
+        <div dojoType="ContentPane" label="Pane 2">
+            <h2>Pane 2</h2>
+            <p>Nunc consequat nisi vitae quam. Suspendisse sed nunc. Proin…</p>
+        </div>
+        <div dojoType="ContentPane" label="Pane 3">
+            <h2>Pane 3</h2>
+            <p>Nunc consequat nisi vitae quam. Suspendisse sed nunc. Proin…</p>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- Dojo’s package architecture is very powerful and deserves a look if you’re interested in
+attempts at maintaining large code bases with JavaScript. Additionally, considering the sheer
+vastness of the library, you’re bound to find some functionality that can benefit you. -->
+<!-- Dojo is an incredibly popular framework that provides everything that a developer needs 
+to build a full web application. This means that there are a lot of sublibraries that need to
+be included and evaluated individually, otherwise the whole library would simply be too
+large to handle gracefully. More information about Dojo can be found on its project site:
+http://dojotoolkit.org/.
+Dojo has an entire package system built around JavaScript namespacing. You can
+import new packages dynamically, upon which they’re automatically executed and ready
+for use. Listing 3-9 shows an example of the namespacing that is used within Dojo. -->
