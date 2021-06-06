@@ -1,3 +1,4 @@
+// Listing 1-2. Providing a User with List of Classes
 // Create a new Schedule object and save it in
 // the variable 'mySchedule'
 var mySchedule = new Schedule([
